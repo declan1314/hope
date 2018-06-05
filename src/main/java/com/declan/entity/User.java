@@ -1,8 +1,11 @@
 package com.declan.entity;
 
+import javax.persistence.Entity;
+
 /**
  * Created by Administrator on 2018/6/3/003.
  */
+@Entity
 public class User {
 
     private String id;
