@@ -3,6 +3,7 @@ package com.declan.dao;
 import com.declan.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,8 +18,10 @@ public class UserDao {
     private SessionFactory sessionFactory;
 
     public String save(User user) {
-        Session session = sessionFactory.openSession();
+        Session session=this.sessionFactory.openSession();
+        Transaction tx=session.beginTransaction();
         session.save(user);
+        tx.commit();
         return "success";
     }
 }

@@ -23,22 +23,29 @@
     </bean>
 
     <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource">
-        <property name="url" value="jdbc:mysql://203.195.160.41:3307/test" />
+        <property name="url" value="jdbc:mysql://203.195.160.41:3306/test" />
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <property name="username" value="root" />
         <property name="password" value="abc123_" />
     </bean>
 
+    <!--<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">-->
+        <!--<property name="dataSource" ref="dataSource" />-->
+        <!--<property name="mappingLocations">-->
+            <!--<value>classpath:/com/declan/entity/*.hbm.xml </value>-->
+        <!--</property>-->
+        <!--<property name="hibernateProperties">-->
+            <!--<props>-->
+                <!--<prop key="hibernate.show_sql">true</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+    <!--</bean>-->
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="mappingLocations">
-            <value>classpath:com/declan/entity/*.hbm.xml</value>
-        </property>
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.show_sql">true</prop>
-            </props>
-        </property>
+        <!-- 配置依赖的数据源属性 -->
+        <property name="dataSource" ref="dataSource"></property>
+        <!-- hibernate 配置文件的路径 -->
+        <property name="configLocation" value="classpath:hibernate/hibernate.cfg.xml"></property>
+        <property name="mappingLocations" value="classpath:com/declan/entity/*.hbm.xml"></property>
     </bean>
 
     <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
